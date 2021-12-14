@@ -24,6 +24,7 @@ const (
 	FORMAT_DATETIME = "2006-01-02 15:04:05"
 )
 
+// FormatTime - format datetime with params
 func FormatTime(datetime time.Time, format string) string {
 	return datetime.Format(format)
 }
