@@ -10,13 +10,13 @@ import (
 	"github.com/xiya-team/helpers"
 )
 
-func CreateToken(user map[string]string) string {
+func CreateToken(userId uint, usename string) string {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = time.Now().Add(time.Hour * time.Duration(72)).Unix()
 	claims["iat"] = time.Now().Unix()
-	claims["id"] = user["id"]
-	claims["verification"] = helpers.Md5(user["UserName"])
-	claims["user_name"] = user["UserName"]
+	claims["id"] = userId
+	claims["verification"] = helpers.Md5(usename)
+	claims["user_name"] = usename
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	//token.Claims=claims
