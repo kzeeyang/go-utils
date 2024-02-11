@@ -2,8 +2,6 @@ package util
 
 import (
 	"fmt"
-	"syncCompanyInfo/common"
-	"syncCompanyInfo/models"
 	"time"
 
 	//"github.com/astaxie/beego"
@@ -12,13 +10,13 @@ import (
 	"github.com/xiya-team/helpers"
 )
 
-func CreateToken(user models.User) string {
+func CreateToken(user map[string]string) string {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = time.Now().Add(time.Hour * time.Duration(72)).Unix()
 	claims["iat"] = time.Now().Unix()
-	claims["id"] = user.Id
-	claims["verification"] = helpers.Md5(user.UserName)
-	claims["user_name"] = user.UserName
+	claims["id"] = user["id"]
+	claims["verification"] = helpers.Md5(user["UserName"])
+	claims["user_name"] = user["UserName"]
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	//token.Claims=claims
@@ -98,8 +96,7 @@ func CheckToken(tokenString string) (b bool, t string, code int) {
 	// }
 
 	userId := GetUserIdByToken(tokenString)
-	user_name := GetUserNameByToken(tokenString)
-	common.UserName = user_name
+	// user_name := GetUserNameByToken(tokenString)
 	return true, "验证通过", userId
 }
 
