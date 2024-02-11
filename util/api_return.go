@@ -2,12 +2,9 @@ package d
 
 import (
 	"time"
-
-	"github.com/kzeeyang/go-utils/e"
-	"github.com/kzeeyang/go-utils/util"
 )
 
-//普通json格式
+// 普通json格式
 func ReturnJson(code int, msg string, data interface{}) (jsonData map[string]interface{}) {
 	jsonData = make(map[string]interface{}, 3)
 	jsonData["time_stamp"] = time.Now()
@@ -20,22 +17,22 @@ func ReturnJson(code int, msg string, data interface{}) (jsonData map[string]int
 }
 
 func ReturnSuccessJson(data interface{}) map[string]interface{} {
-	return ReturnJson(e.SUCCESS, e.ResponseMap[e.SUCCESS], data)
+	return ReturnJson(SUCCESS, ResponseMap[SUCCESS], data)
 }
 func ReturnServerErrJson(data interface{}) map[string]interface{} {
-	return ReturnJson(e.ERROR, e.ResponseMap[e.ERROR], data)
+	return ReturnJson(ERROR, ResponseMap[ERROR], data)
 }
 func ReturnParamErrJson(data interface{}) map[string]interface{} {
-	return ReturnJson(e.INVALID_PARAMS, e.ResponseMap[e.INVALID_PARAMS], data)
+	return ReturnJson(INVALID_PARAMS, ResponseMap[INVALID_PARAMS], data)
 }
 
-//layui 后台返回需要的json格式
+// layui 后台返回需要的json格式
 func LayuiJson(code int, msg string, data, count, pageNo, pageSize interface{}) (jsonData map[string]interface{}) {
 	jsonData = make(map[string]interface{}, 3)
 	jsonData["code"] = code
 	jsonData["msg"] = msg
 	if count != false {
-		jsonData["data"] = util.PageUtil(count.(int64), pageNo.(int64), pageSize.(int64), data)
+		jsonData["data"] = PageUtil(count.(int64), pageNo.(int64), pageSize.(int64), data)
 	} else {
 		jsonData["data"] = data
 	}
@@ -44,7 +41,7 @@ func LayuiJson(code int, msg string, data, count, pageNo, pageSize interface{}) 
 	return
 }
 
-//bootstrap table 返回json
+// bootstrap table 返回json
 func TableJson(data, offset, limit, total interface{}) (jsonData map[string]interface{}) {
 	jsonData = make(map[string]interface{}, 3)
 	jsonData["rows"] = data
