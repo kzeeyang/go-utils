@@ -1,4 +1,4 @@
-package e
+package util
 
 const (
 	SUCCESS        = 0
