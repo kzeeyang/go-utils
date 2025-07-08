@@ -7,7 +7,7 @@ import (
 	//"github.com/astaxie/beego"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/xiya-team/helpers"
+	"github.com/kzeeyang/helpers"
 )
 
 func CreateToken(userId uint, usename string) string {
